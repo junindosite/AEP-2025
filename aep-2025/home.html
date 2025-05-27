@@ -3,28 +3,297 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ODS11 em Ação</title>
-
+  <title>ODS11 Maringá - Preservação do Patrimônio</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="stylehome.css">
 </head>
 
-<body class="bg-light">
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-success">
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand text-white fw-bold" href="#">ODS11 em Ação</a>
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <i class="bi bi-tree-fill me-2 fs-4"></i>
+        <span>ODS11 Maringá</span>
+      </a>
       <div class="ms-auto">
-       <button class="btn btn-outline-light me-2">home</button>
-        <a href="./login .html"><button class="btn btn-outline-light me-2">Login</button></a>
-        <a href="registrar.html"><button class="btn btn-outline-light me-2">Registrar</button></a>
+        <a href="./index.html">
+          <button class="btn btn-outline-success-custom">
+            <i class="bi bi-box-arrow-right me-1"></i>Sair
+          </button>
+        </a>
       </div>
     </div>
   </nav>
 
+  <div class="container mt-4">
+    <!-- Hero Section -->
+    <div class="hero-section text-center">
+      <h1 class="fw-bold mb-3">Preservação do Patrimônio de Maringá</h1>
+      <p class="mb-0 fs-5">Contribua para uma cidade mais sustentável e inclusiva através de denúncias conscientes</p>
+    </div>
 
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card dashboard-card text-center">
+          <div class="card-body">
+            <div class="stat-icon icon-warning mx-auto">
+              <i class="bi bi-exclamation-triangle-fill fs-3"></i>
+            </div>
+            <h3 class="fw-bold text-dark">15</h3>
+            <p class="text-muted mb-0">Denúncias Ativas</p>
+            <small class="text-muted">Aguardando resolução</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dashboard-card text-center">
+          <div class="card-body">
+            <div class="stat-icon icon-success mx-auto">
+              <i class="bi bi-check-circle-fill fs-3"></i>
+            </div>
+            <h3 class="fw-bold text-dark">8</h3>
+            <p class="text-muted mb-0">Resolvidas este Mês</p>
+            <small class="text-muted">+3 em relação ao mês anterior</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dashboard-card text-center">
+          <div class="card-body">
+            <div class="stat-icon icon-danger mx-auto">
+              <i class="bi bi-geo-alt-fill fs-3"></i>
+            </div>
+            <h5 class="fw-bold text-dark">Parque do Ingá</h5>
+            <p class="text-muted mb-0">Local Mais Denunciado</p>
+            <small class="text-muted">Área verde com maior incidência</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="text-center mb-5">
+      <button class="btn btn-success-custom btn-lg px-5 py-3" data-bs-toggle="modal" data-bs-target="#novaDenunciaModal">
+        <i class="bi bi-plus-circle me-2"></i>Registrar Nova Denúncia
+      </button>
+      <p class="text-muted mt-2 small">Sua contribuição ajuda a preservar o patrimônio da nossa cidade</p>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="novaDenunciaModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-success-gradient text-white border-0">
+            <h5 class="modal-title fw-bold">
+              <i class="bi bi-shield-check me-2"></i>Registrar Nova Denúncia
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form>
+              <div class="mb-4">
+                <label for="tipoPatrimonio" class="form-label fw-semibold">Tipo de Patrimônio</label>
+                <select class="form-select" id="tipoPatrimonio" required>
+                  <option value="">Selecione o tipo...</option>
+                  <option value="cultural">🏛️ Patrimônio Cultural</option>
+                  <option value="natural">🌳 Patrimônio Natural</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label for="localizacao" class="form-label fw-semibold">Localização</label>
+                <input type="text" class="form-control" id="localizacao" placeholder="Ex: Praça da Catedral, Parque do Ingá, Bosque 2..." required>
+                <small class="text-muted">Seja específico para facilitar a localização</small>
+              </div>
+              <div class="mb-4">
+                <label for="descricaoProblema" class="form-label fw-semibold">Descrição do Problema</label>
+                <textarea class="form-control" id="descricaoProblema" rows="4" placeholder="Descreva detalhadamente o problema: danos estruturais, poluição, descarte irregular, vandalismo..." required></textarea>
+              </div>
+              <div class="mb-4">
+                <label for="uploadImagens" class="form-label fw-semibold">Anexar Imagens</label>
+                <input type="file" class="form-control" id="uploadImagens" accept="image/*" multiple>
+                <small class="text-muted">Fotos ajudam na identificação e resolução do problema</small>
+              </div>
+              <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="anonimoCheck">
+                <label class="form-check-label" for="anonimoCheck">
+                  <i class="bi bi-incognito me-1"></i>Enviar denúncia de forma anônima
+                </label>
+              </div>
+              <button type="submit" class="btn btn-success-custom w-100">
+                <i class="bi bi-send me-2"></i>Enviar Denúncia
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Reports -->
+    <div class="card mb-4">
+      <div class="card-header bg-white border-0 pt-4">
+        <h4 class="fw-bold mb-0 text-success-custom">
+          <i class="bi bi-clock-history me-2"></i>Minhas Denúncias Recentes
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="denuncia-item">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <h6 class="fw-semibold mb-1">Dano em Obra de Arte no Parque do Ingá</h6>
+                  <p class="text-muted small mb-2">
+                    <i class="bi bi-geo-alt me-1"></i>Parque do Ingá, próximo à entrada principal
+                  </p>
+                  <span class="badge-status status-analise">Em Análise</span>
+                </div>
+                <small class="text-muted">20/05/2025</small>
+              </div>
+              <p class="small text-muted mb-2">Escultura com danos na base, possivelmente causados por vandalismo. Necessita reparo urgente.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="image-gallery">
+                <img src="https://via.placeholder.com/60x60/059669/ffffff?text=IMG1" alt="Evidência 1" class="image-thumbnail" data-bs-toggle="tooltip" title="Clique para ampliar">
+                <img src="https://via.placeholder.com/60x60/10b981/ffffff?text=IMG2" alt="Evidência 2" class="image-thumbnail" data-bs-toggle="tooltip" title="Clique para ampliar">
+                <img src="https://via.placeholder.com/60x60/34d399/ffffff?text=IMG3" alt="Evidência 3" class="image-thumbnail" data-bs-toggle="tooltip" title="Clique para ampliar">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="denuncia-item">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <h6 class="fw-semibold mb-1">Descarte Irregular de Lixo em Área Verde</h6>
+                  <p class="text-muted small mb-2">
+                    <i class="bi bi-geo-alt me-1"></i>Bosque 2, próximo ao playground
+                  </p>
+                  <span class="badge-status status-andamento">Em Andamento</span>
+                </div>
+                <small class="text-muted">18/05/2025</small>
+              </div>
+              <p class="small text-muted mb-2">Acúmulo de resíduos de construção descartados irregularmente, comprometendo a vegetação local.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="image-gallery">
+                <img src="https://via.placeholder.com/60x60/ef4444/ffffff?text=LIXO" alt="Lixo irregular" class="image-thumbnail" data-bs-toggle="tooltip" title="Clique para ampliar">
+                <img src="https://via.placeholder.com/60x60/f59e0b/ffffff?text=ÁREA" alt="Área afetada" class="image-thumbnail" data-bs-toggle="tooltip" title="Clique para ampliar">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="denuncia-item">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <h6 class="fw-semibold mb-1">Pichação em Monumento Histórico</h6>
+                  <p class="text-muted small mb-2">
+                    <i class="bi bi-geo-alt me-1"></i>Catedral Basílica, fachada lateral
+                  </p>
+                  <span class="badge-status status-resolvido">Resolvido</span>
+                </div>
+                <small class="text-muted">15/05/2025</small>
+              </div>
+              <p class="small text-muted mb-2">Pichação removida com sucesso. Monumento restaurado pela equipe de conservação municipal.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="image-gallery">
+                <img src="https://via.placeholder.com/60x60/059669/ffffff?text=ANTES" alt="Antes" class="image-thumbnail" data-bs-toggle="tooltip" title="Antes da limpeza">
+                <img src="https://via.placeholder.com/60x60/10b981/ffffff?text=DEPOIS" alt="Depois" class="image-thumbnail" data-bs-toggle="tooltip" title="Após restauração">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="card mb-4">
+      <div class="card-header bg-white border-0 pt-4">
+        <h4 class="fw-bold mb-0 text-success-custom">
+          <i class="bi bi-map me-2"></i>Mapeamento das Denúncias
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="map-placeholder d-flex flex-column justify-content-center align-items-center text-center">
+          <i class="bi bi-geo-alt-fill" style="font-size: 3rem; color: var(--primary-green); margin-bottom: 1rem;"></i>
+          <h5 class="text-success-custom">Mapa Interativo de Maringá</h5>
+          <p class="text-muted">Visualização geográfica das denúncias de patrimônio cultural e natural</p>
+          <small class="text-muted">Integração com sistema de geolocalização em desenvolvimento</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- News Section -->
+    <div class="card mb-4">
+      <div class="card-header bg-white border-0 pt-4">
+        <h4 class="fw-bold mb-0 text-success-custom">
+          <i class="bi bi-newspaper me-2"></i>Atualizações e Iniciativas
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="card border-0" style="background-color: var(--light-green);">
+              <div class="card-body">
+                <h6 class="fw-semibold text-success-custom">Revitalização de Praças Históricas</h6>
+                <p class="small text-muted mb-2">Prefeitura inicia projeto de recuperação das principais praças do centro histórico</p>
+                <small class="text-muted">26/05/2025</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0" style="background-color: #fef3c7;">
+              <div class="card-body">
+                <h6 class="fw-semibold" style="color: #92400e;">Campanha Cidade Limpa</h6>
+                <p class="small text-muted mb-2">Nova iniciativa de educação ambiental para redução do descarte irregular</p>
+                <small class="text-muted">20/05/2025</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0" style="background-color: #dbeafe;">
+              <div class="card-body">
+                <h6 class="fw-semibold" style="color: #1e40af;">Monitoramento Digital</h6>
+                <p class="small text-muted mb-2">Sistema de câmeras para proteção de monumentos em fase de implementação</p>
+                <small class="text-muted">15/05/2025</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggestions Section -->
+    <div class="card mb-5">
+      <div class="card-header bg-white border-0 pt-4">
+        <h4 class="fw-bold mb-0 text-success-custom">
+          <i class="bi bi-lightbulb me-2"></i>Compartilhe suas Ideias
+        </h4>
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-3">Sua voz é importante! Contribua com sugestões para tornar Maringá ainda mais sustentável e preservar nosso patrimônio.</p>
+        <form>
+          <div class="mb-3">
+            <textarea class="form-control" id="sugestao" rows="4" placeholder="Compartilhe suas ideias para melhorar a preservação do patrimônio, iniciativas ambientais, ou funcionalidades para esta plataforma..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-success-custom">
+            <i class="bi bi-send me-2"></i>Enviar Sugestão
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
