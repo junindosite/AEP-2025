@@ -1,5 +1,5 @@
 body {
-  background-image: url('https://cdnb.artstation.com/p/assets/images/images/042/368/397/large/txxus-parallax-forest.jpg?1634304583');
+ 
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -18,4 +18,12 @@ body {
 
 .navbar-brand {
   font-size: 1.5rem;
+}
+
+#jatemconta{
+  margin-left: 55px;
+}
+
+#naotemconta{
+   margin-left: 65px;
 }
