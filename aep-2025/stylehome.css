@@ -190,3 +190,11 @@ body {
 .icon-warning { background-color: #fef3c7; color: #d97706; }
 .icon-success { background-color: var(--verde-claro); color: var(--verde-principal); }
 .icon-danger { background-color: #fee2e2; color: #dc2626; }
+
+#jatemconta{
+  margin-left: 55px;
+}
+
+#naotemconta{
+   margin-left: 65px;
+}
