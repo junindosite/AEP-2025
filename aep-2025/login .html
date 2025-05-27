@@ -16,36 +16,24 @@
     <div class="container">
       <a class="navbar-brand text-white fw-bold" href="#">ODS11 em Ação</a>
       <div class="ms-auto">
-        <a href="./index.html"><button class="btn btn-outline-light me-2">Login</button></a>
-        <button class="btn btn-outline-light me-2">Registrar</button>
+        <button class="btn btn-outline-light me-2">Login</button>
+        <a href="registrar.html"><button class="btn btn-outline-light me-2">Registrar</button></a>
       </div>
     </div>
   </nav>
 
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 shadow" style="width: 400px;">
-      <h3 class="text-center mb-4 text-success">Crie sua conta!</h3>
+      <h3 class="text-center mb-4 text-success">Bem-vindo!</h3>
       <form>
         <div class="mb-3">
-          <label for="usuario" class="form-label">Nome de usuário.</label>
-          <input type="text" class="form-control" id="usuario" placeholder="Seu nome de usuario" required>
+          <label for="usuario" class="form-label">Usuário</label>
+          <input type="text" class="form-control" id="usuario" placeholder="Digite seu usuário">
         </div>
         <div class="mb-3">
-          <label for="email" class="form-label">Email.</label>
-          <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com" required>
+          <label for="senha" class="form-label">Senha</label>
+          <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
         </div>
-         <div class="mb-3">
-          <label for="senha" class="form-label">Senha.</label>
-          <input type="password" class="form-control" id="senha" placeholder="*********" required>
-        </div>
-        <div class="mb-3">
-          <label for="viagem" class="form-label">Você é de Maringá?</label>
-           <select name="viagem" id="viagem" class="form-select">
-            <option value="sim">Sim</option>
-             <option value="nao">Não</option>
-          </select>
-        </div>
-
         <div class="d-grid">
           <button type="submit" class="btn btn-success">Entrar</button>
         </div>
