@@ -52,6 +52,7 @@ body {
   border: 1px solid var(--verde-claro);
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(5, 150, 105, 0.08);
+  opacity: 0.9;
 }
 
 /* Botão verde personalizado */
