@@ -3,60 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ODS11 em Ação</title>
+  <title>ODS11 em Ação - Registro</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"> 
 </head>
 
 <body class="bg-light">
+  <div id="app"> 
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-success">
-    <div class="container">
-      <a class="navbar-brand text-white fw-bold" href="#">ODS11 em Ação</a>
-      <div class="ms-auto">
-        <a href="./home.html"><button class="btn btn-outline-light me-2">home</button></a>
-        <a href="./login.html"><button class="btn btn-outline-light me-2">Login</button></a>
-        <button class="btn btn-outline-light me-2">Registrar</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+      <div class="container">
+        <a class="navbar-brand text-white fw-bold" href="#">ODS11 em Ação</a>
+        <div class="ms-auto">
+          <a href="home.html" class="btn btn-outline-light me-2">Home</a>
+          <a href="login.html" class="btn btn-outline-light me-2">Login</a>
+          <a href="registrar.html" class="btn btn-outline-light me-2">Registrar</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div class="card p-4 shadow" style="width: 400px;">
+        <h3 class="text-center mb-4 text-success">Crie sua conta!</h3> 
+        
+        <form @submit.prevent="registrar">
+          <div v-if="mensagem" :class="['alert', mensagemTipo === 'sucesso' ? 'alert-success' : 'alert-danger']">
+            {{ mensagem }}
+          </div>
+          <div class="mb-3">
+            <label for="usuario" class="form-label">Nome de usuário.</label>
+            <input type="text" class="form-control" v-model="usuario" placeholder="Seu nome de usuário" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email.</label>
+            <input type="email" class="form-control" v-model="email" placeholder="seuemail@exemplo.com" required>
+          </div>
+          <div class="mb-3">
+            <label for="senha" class="form-label">Senha.</label>
+            <input type="password" class="form-control" v-model="senha" placeholder="*********" required>
+          </div>
+          <div class="mb-3">
+            <label for="cidade" class="form-label">Você é de Maringá?</label>
+            <select name="cidade" id="cidade" class="form-select" v-model="cidade">
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+          </div>
+          <div class="mt-2" id="jatemconta">
+            <a href="login.html">Já tem uma conta? Clique aqui!</a>
+          </div>
+        </form>
       </div>
     </div>
-  </nav>
 
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4 shadow" style="width: 400px;">
-      <h3 class="text-center mb-4 text-success">Crie sua conta!</h3>
-      <form>
-        <div class="mb-3">
-          <label for="usuario" class="form-label">Nome de usuário.</label>
-          <input type="text" class="form-control" id="usuario" placeholder="Seu nome de usuario" required>
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" ref="successModalRef">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel">{{ successModalTitle }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {{ successModalBody }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email.</label>
-          <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com" required>
-        </div>
-         <div class="mb-3">
-          <label for="senha" class="form-label">Senha.</label>
-          <input type="password" class="form-control" id="senha" placeholder="*********" required>
-        </div>
-        <div class="mb-3">
-          <label for="cidade" class="form-label">Você é de Maringá?</label>
-           <select name="cidade" id="cidade" class="form-select">
-            <option value="sim">Sim</option>
-             <option value="nao">Não</option>
-          </select>
-        </div>
-
-        <div class="d-grid">
-          <button type="submit" class="btn btn-success">Cadastrar</button>
-        </div>
-        <div class="mt-2 " id="jatemconta">
-          <a href="login.html">Já tem uma conta? Clique aqui!</a>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
+    </div> 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="registrar.js"></script> </body>
 </html>
