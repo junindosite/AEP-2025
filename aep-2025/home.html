@@ -26,7 +26,8 @@
     </div>
   </nav>
 
-  <div class="container mt-4" id="app"> <div class="hero-section text-center">
+  <div class="container mt-4" id="app"> 
+    <div class="hero-section text-center">
       <h1 class="fw-bold mb-3">Preservação do Patrimônio de Maringá</h1>
       <p class="mb-0 fs-5">Contribua para uma cidade mais sustentável e inclusiva através de denúncias conscientes</p>
     </div>
@@ -87,7 +88,8 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body p-4">
-            <form @submit="enviarDenuncia"> <div class="mb-4">
+            <form @submit="enviarDenuncia"> 
+              <div class="mb-4">
                 <label for="tipoPatrimonio" class="form-label fw-semibold">Tipo de Patrimônio</label>
                 <select class="form-select" id="tipoPatrimonio" v-model="tipoPatrimonio" required>
                   <option value="">Selecione o tipo...</option>
@@ -153,13 +155,15 @@
               <div class="image-gallery">
                 <img v-if="denuncia.imagens && denuncia.imagens.length > 0" 
                      :src="denuncia.imagens[0]" 
-                     alt="Evidência" 
+                     alt="Evidência da denúncia" 
                      class="image-thumbnail" 
                      data-bs-toggle="tooltip" 
-                     title="Clique para ampliar">
+                     title="Clique para ampliar"
+                     @click="abrirModalImagem(denuncia.imagens[0])" 
+                     style="cursor: pointer;"> 
                 <img v-else 
                      src="https://via.placeholder.com/60x60/cccccc/ffffff?text=SEM%20IMG" 
-                     alt="Sem Imagem" 
+                     alt="Sem Imagem disponível para esta denúncia" 
                      class="image-thumbnail" 
                      data-bs-toggle="tooltip" 
                      title="Nenhuma imagem disponível">
@@ -173,13 +177,16 @@
     <div class="card mb-4">
       <div class="card-header bg-white border-0 pt-4">
         <h4 class="fw-bold mb-0 text-success-custom">
-          <i class="bi bi-map me-2"></i>Mapeamento das Denúncias
+          <i class="bi bi-map me-2"></i>Mapeamento das Denúncias em Maringá
         </h4>
       </div>
-      <div class="card-body">
-        <img src="https://www.unicesumar.edu.br/epcc2021/wp-content/uploads/sites/235/2017/06/mapa-maringa-800.jpg" alt="Mapa Interativo de Maringá" class="img-fluid" style="max-width:100%; height:auto;">
-        <p class="text-muted">Visualização geográfica das denúncias de patrimônio cultural e natural</p>
-        <small class="text-muted">Integração com sistema de geolocalização em desenvolvimento</small>
+      <div class="card-body text-center"> <img src="https://www.unicesumar.edu.br/epcc2021/wp-content/uploads/sites/235/2017/06/mapa-maringa-800.jpg" 
+             alt="Mapa de Maringá com locais de denúncia de patrimônio" 
+             class="img-fluid" 
+             style="max-width:100%; height:auto; border-radius: 8px;"> <p class="text-muted mt-3 mb-1">
+          Visualize os pontos de denúncia de patrimônio cultural e natural em nossa cidade.
+        </p>
+        <small class="text-muted">Os marcadores no mapa são apenas representativos.</small>
       </div>
     </div>
 
@@ -238,6 +245,20 @@
             <i class="bi bi-send me-2"></i>Enviar Sugestão
           </button>
         </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="imagemModal" tabindex="-1" aria-labelledby="imagemModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imagemModalLabel">Imagem da Denúncia</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img :src="imagemSelecionada" class="img-fluid" alt="Imagem Expandida">
+          </div>
+        </div>
       </div>
     </div>
 

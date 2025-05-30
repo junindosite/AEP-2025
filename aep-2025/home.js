@@ -2,11 +2,13 @@ const { createApp, ref, computed } = Vue;
 
 createApp({
   setup() {
-
     const tipoPatrimonio = ref('');
     const localizacao = ref('');
     const descricaoProblema = ref('');
     const anonimo = ref(false);
+
+    // Nova variável reativa para armazenar a URL da imagem selecionada para o modal
+    const imagemSelecionada = ref(''); 
 
     const denuncias = ref([
       {
@@ -34,6 +36,7 @@ createApp({
         imagens: ['https://gmconline.com.br/wp-content/uploads/2022/10/ec78e180-0ddc-40ba-a728-9814f674c67c.jpg'] 
       }
     ]);
+
     const denunciasAtivasCount = computed(() => {
       return denuncias.value.filter(d => d.status === 'Em Análise' || d.status === 'Em Andamento').length;
     });
@@ -99,6 +102,14 @@ createApp({
         imagens: []  
       };
 
+      // Simula o upload de imagem. Em um ambiente real, você faria um upload de arquivo e obteria a URL.
+      const uploadImagensInput = document.getElementById('uploadImagens');
+      if (uploadImagensInput && uploadImagensInput.files.length > 0) {
+        // Por simplicidade, vamos apenas pegar a primeira imagem para exibição no modal
+        // Em um cenário real, você processaria todas as imagens e as adicionaria ao array
+        novaDenuncia.imagens.push(URL.createObjectURL(uploadImagensInput.files[0]));
+      }
+
       denuncias.value.unshift(novaDenuncia); 
       
       tipoPatrimonio.value = '';
@@ -115,6 +126,14 @@ createApp({
       }
     };
 
+    // Nova função para abrir o modal de imagem
+    const abrirModalImagem = (urlImagem) => {
+      imagemSelecionada.value = urlImagem;
+      const modalElement = document.getElementById('imagemModal');
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    };
+
     return {
       tipoPatrimonio,
       localizacao,
@@ -125,7 +144,10 @@ createApp({
       denunciasResolvidasMesCount,
       localMaisDenunciado,
       getStatusClass,
-      enviarDenuncia
+      enviarDenuncia,
+      // Retorna a nova variável e função
+      imagemSelecionada, 
+      abrirModalImagem 
     };
   }
 }).mount('#app');
