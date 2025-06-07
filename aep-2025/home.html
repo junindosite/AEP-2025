@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODS11 Maringá - Preservação do Patrimônio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="stylehome.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <i class="bi bi-tree-fill me-2 fs-4"></i>
+        <span>ODS11 Maringá</span>
+      </a>
+      <div class="ms-auto">
+        <a href="./login.html" >
+          <button class="btn btn-outline-success-custom">
+            <i class="bi bi-box-arrow-right me-1"></i>Sair
+          </button>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4" id="app"> 
+    <div class="hero-section text-center">
+      <h1 class="fw-bold mb-3">Preservação do Patrimônio de Maringá</h1>
+      <p class="mb-0 fs-5">Contribua para uma cidade mais sustentável e inclusiva através de denúncias conscientes</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card dashboard-card text-center">
+          <div class="card-body">
+            <div class="stat-icon icon-warning mx-auto">
+              <i class="bi bi-exclamation-triangle-fill fs-3"></i>
+            </div>
+            <h3 class="fw-bold text-dark">{{ denunciasAtivasCount }}</h3>
+            <p class="text-muted mb-0">Denúncias Ativas</p>
+            <small class="text-muted">Aguardando resolução</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dashboard-card text-center">
+          <div class="card-body">
+            <div class="stat-icon icon-success mx-auto">
+              <i class="bi bi-check-circle-fill fs-3"></i>
+            </div>
+            <h3 class="fw-bold text-dark">{{ denunciasResolvidasMesCount }}</h3>
+            <p class="text-muted mb-0">Resolvidas este Mês</p>
+            <small class="text-muted">+3 em relação ao mês anterior</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dashboard-card text-center">
+          <div class="card-body">
+            <div class="stat-icon icon-danger mx-auto">
+              <i class="bi bi-geo-alt-fill fs-3"></i>
+            </div>
+            <h5 class="fw-bold text-dark">{{ localMaisDenunciado }}</h5>
+            <p class="text-muted mb-0">Local Mais Denunciado</p>
+            <small class="text-muted">Área verde com maior incidência</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mb-5">
+      <button class="btn btn-success-custom btn-lg px-5 py-3" data-bs-toggle="modal" data-bs-target="#novaDenunciaModal">
+        <i class="bi bi-plus-circle me-2"></i>Registrar Nova Denúncia
+      </button>
+      <p class="text-muted mt-2 small">Sua contribuição ajuda a preservar o patrimônio da nossa cidade</p>
+    </div>
+
+    <div class="modal fade" id="novaDenunciaModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-success-gradient text-white border-0">
+            <h5 class="modal-title fw-bold">
+              <i class="bi bi-shield-check me-2"></i>Registrar Nova Denúncia
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form @submit="enviarDenuncia"> 
+              <div class="mb-4">
+                <label for="tipoPatrimonio" class="form-label fw-semibold">Tipo de Patrimônio</label>
+                <select class="form-select" id="tipoPatrimonio" v-model="tipoPatrimonio" required>
+                  <option value="">Selecione o tipo...</option>
+                  <option value="Patrimônio Cultural">🏛️ Patrimônio Cultural</option>
+                  <option value="Patrimônio Natural">🌳 Patrimônio Natural</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label for="localizacao" class="form-label fw-semibold">Localização</label>
+                <input type="text" class="form-control" id="localizacao" placeholder="Ex: Praça da Catedral, Parque do Ingá, Bosque 2..." v-model="localizacao" required>
+                <small class="text-muted">Seja específico para facilitar a localização</small>
+              </div>
+              <div class="mb-4">
+                <label for="descricaoProblema" class="form-label fw-semibold">Descrição do Problema</label>
+                <textarea class="form-control" id="descricaoProblema" rows="4" placeholder="Descreva detalhadamente o problema: danos estruturais, poluição, descarte irregular, vandalismo..." v-model="descricaoProblema" required></textarea>
+              </div>
+              <div class="mb-4">
+                <label for="uploadImagens" class="form-label fw-semibold">Anexar Imagens</label>
+                <input type="file" class="form-control" id="uploadImagens" accept="image/*" multiple>
+                <small class="text-muted">Fotos ajudam na identificação e resolução do problema</small>
+              </div>
+              <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="anonimoCheck" v-model="anonimo">
+                <label class="form-check-label" for="anonimoCheck">
+                  <i class="bi bi-incognito me-1"></i>Enviar denúncia de forma anônima
+                </label>
+              </div>
+              <button type="submit" class="btn btn-success-custom w-100">
+                <i class="bi bi-send me-2"></i>Enviar Denúncia
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-white border-0 pt-4">
+        <h4 class="fw-bold mb-0 text-success-custom">
+          <i class="bi bi-clock-history me-2"></i>Minhas Denúncias Recentes
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="text-center text-muted py-4" v-if="denuncias.length === 0">
+          <p>Nenhuma denúncia registrada ainda. Seja o primeiro a contribuir!</p>
+        </div>
+        <div class="denuncia-item" v-for="denuncia in denuncias" :key="denuncia.titulo + denuncia.data">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <h6 class="fw-semibold mb-1">{{ denuncia.titulo }}</h6>
+                  <p class="text-muted small mb-2">
+                    <i class="bi bi-geo-alt me-1"></i>{{ denuncia.local }}
+                  </p>
+                  <span :class="['badge-status', getStatusClass(denuncia.status)]">{{ denuncia.status }}</span>
+                </div>
+                <small class="text-muted">{{ denuncia.data }}</small>
+              </div>
+              <p class="small text-muted mb-2">{{ denuncia.descricao }}</p>
+            </div>
+            <div class="col-md-4">
+              <div class="image-gallery">
+                <img v-if="denuncia.imagens && denuncia.imagens.length > 0" 
+                     :src="denuncia.imagens[0]" 
+                     alt="Evidência da denúncia" 
+                     class="image-thumbnail" 
+                     data-bs-toggle="tooltip" 
+                     title="Clique para ampliar"
+                     @click="abrirModalImagem(denuncia.imagens[0])" 
+                     style="cursor: pointer;"> 
+                <img v-else 
+                     src="https://via.placeholder.com/60x60/cccccc/ffffff?text=SEM%20IMG" 
+                     alt="Sem Imagem disponível para esta denúncia" 
+                     class="image-thumbnail" 
+                     data-bs-toggle="tooltip" 
+                     title="Nenhuma imagem disponível">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-white border-0 pt-4">
+        <h4 class="fw-bold mb-0 text-success-custom">
+          <i class="bi bi-map me-2"></i>Mapeamento das Denúncias em Maringá
+        </h4>
+      </div>
+      <div class="card-body text-center"> <img src="https://www.unicesumar.edu.br/epcc2021/wp-content/uploads/sites/235/2017/06/mapa-maringa-800.jpg" 
+             alt="Mapa de Maringá com locais de denúncia de patrimônio" 
+             class="img-fluid" 
+             style="max-width:100%; height:auto; border-radius: 8px;"> <p class="text-muted mt-3 mb-1">
+          Visualize os pontos de denúncia de patrimônio cultural e natural em nossa cidade.
+        </p>
+        <small class="text-muted">Os marcadores no mapa são apenas representativos.</small>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-white border-0 pt-4">
+        <h4 class="fw-bold mb-0 text-success-custom">
+          <i class="bi bi-newspaper me-2"></i>Atualizações e Iniciativas
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="card border-0" style="background-color: var(--light-green);">
+              <div class="card-body">
+                <h6 class="fw-semibold text-success-custom">Revitalização de Praças Históricas</h6>
+                <p class="small text-muted mb-2">Prefeitura inicia projeto de recuperação das principais praças do centro histórico</p>
+                <small class="text-muted">26/05/2025</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0" style="background-color: #fef3c7;">
+              <div class="card-body">
+                <h6 class="fw-semibold" style="color: #92400e;">Campanha Cidade Limpa</h6>
+                <p class="small text-muted mb-2">Nova iniciativa de educação ambiental para redução do descarte irregular</p>
+                <small class="text-muted">20/05/2025</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0" style="background-color: #dbeafe;">
+              <div class="card-body">
+                <h6 class="fw-semibold" style="color: #1e40af;">Monitoramento Digital</h6>
+                <p class="small text-muted mb-2">Sistema de câmeras para proteção de monumentos em fase de implementação</p>
+                <small class="text-muted">15/05/2025</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-5">
+      <div class="card-header bg-white border-0 pt-4">
+        <h4 class="fw-bold mb-0 text-success-custom">
+          <i class="bi bi-lightbulb me-2"></i>Compartilhe suas Ideias
+        </h4>
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-3">Sua voz é importante! Contribua com sugestões para tornar Maringá ainda mais sustentável e preservar nosso patrimônio.</p>
+        <form>
+          <div class="mb-3">
+            <textarea class="form-control" id="sugestao" rows="4" placeholder="Compartilhe suas ideias para melhorar a preservação do patrimônio, iniciativas ambientais, ou funcionalidades para esta plataforma..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-success-custom">
+            <i class="bi bi-send me-2"></i>Enviar Sugestão
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="imagemModal" tabindex="-1" aria-labelledby="imagemModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imagemModalLabel">Imagem da Denúncia</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img :src="imagemSelecionada" class="img-fluid" alt="Imagem Expandida">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>
